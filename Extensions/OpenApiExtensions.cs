@@ -19,8 +19,8 @@ public static class OpenApiExtensions
                     Description = "API de integração com autenticação JWT (v1 e v2 do Microsoft Entra ID)",
                     Contact = new()
                     {
-                        Name = "Seu Nome",
-                        Email = "seu.email@example.com"
+                        Name = "Sergio Santos",
+                        Email = "sergiorobsantos@gmail.com"
                     }
                 };
 
