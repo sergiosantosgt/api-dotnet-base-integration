@@ -36,6 +36,22 @@ public static class OpenApiExtensions
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+
+            // Endpoint de debug que lista as rotas/endpoints registrados (apenas dev)
+            app.MapGet("/__endpoints", () =>
+            {
+                var ds = ((IEndpointRouteBuilder)app).DataSources;
+                var list = ds.SelectMany(s => s.Endpoints)
+                    .Select(e => new
+                    {
+                        DisplayName = e.DisplayName,
+                        Route = e is RouteEndpoint re ? re.RoutePattern.RawText : e.ToString()
+                    })
+                    .OrderBy(x => x.Route)
+                    .ToList();
+
+                return Results.Ok(list);
+            });
         }
 
         return app;
