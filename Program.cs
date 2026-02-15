@@ -15,11 +15,17 @@ builder.Services.AddCustomAuthorization();
 // OpenAPI/Swagger
 builder.Services.AddCustomOpenApi();
 
+// CORS (Cross-Origin Resource Sharing)
+builder.Services.AddCustomCors();
+
 // ============================================
 // Configuração do Pipeline
 // ============================================
 
 var app = builder.Build();
+
+// CORS deve estar antes de autenticação
+app.UseCustomCors();
 
 // Middleware de autenticação e autorização
 app.UseAuthentication();
